@@ -11,6 +11,13 @@
                     href="{{ $project->cover_image !== null ? asset('/storage/' . $project->cover_image) : asset('/img/aaaa.jpg') }}">Download
                     image</a>
                 <p>{{ $project->type ? $project->type->name : 'Without type' }}</p>
+                <p>
+                    @forelse ($project->technologies as $technology)
+                        a{{ $technology->name }}
+                    @empty
+                        The project doesn't use any technology
+                    @endforelse
+                </p>
                 <p>{{ $project->slug }}</p>
                 <p>{{ $project->description }}</p>
             </div>

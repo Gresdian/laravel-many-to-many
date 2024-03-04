@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -33,7 +34,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -58,6 +61,10 @@ class ProjectController extends Controller
         $project->fill($form_data);
 
         $project->save();
+
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($form_data['technologies']);
+        }
 
 
         return redirect()->route('admin.projects.index');
