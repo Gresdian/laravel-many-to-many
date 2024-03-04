@@ -13,7 +13,7 @@
                 <p>{{ $project->type ? $project->type->name : 'Without type' }}</p>
                 <p>
                     @forelse ($project->technologies as $technology)
-                        a{{ $technology->name }}
+                        #{{ $technology->name }}
                     @empty
                         The project doesn't use any technology
                     @endforelse
